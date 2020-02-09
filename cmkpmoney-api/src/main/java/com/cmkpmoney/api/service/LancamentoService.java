@@ -20,6 +20,7 @@ public class LancamentoService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
+	//regra de negocio que verifica se pessoa esta existente, caso não, salva
 	public Lancamento salvarLancamento(Lancamento lancamento) {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(lancamento.getPessoa().getCodigo());
 		if(!pessoa.isPresent() || !pessoa.get().getAtivo())

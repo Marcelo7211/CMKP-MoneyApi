@@ -21,20 +21,21 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-			.withClient("Angular")
-			.secret("angular")
-			.scopes("read", "write")
-			.authorizedGrantTypes("client_credentials")
-			.accessTokenValiditySeconds(1800);
+			.withClient("Angular")//configurando o usuario client(angular, react, node, terão que acessar por este usuario)
+			.secret("angular")		//obs. isso não é a senha do usuario (admin, admin)
+			.scopes("read", "write") //client pode ler e escrever na api
+			.authorizedGrantTypes("client_credentials") //grand_type da requisição
+			.accessTokenValiditySeconds(1800); //definido o tempo de validade do da bearer (30 min)
 	}
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore())
+		endpoints.tokenStore(tokenStore()) // definindo onde será quardado o token
 		.authenticationManager(authenticationManager);
 	}
 
-	private TokenStore tokenStore() {		
+	private TokenStore tokenStore() {
+		//quardando o token em memoria
 		return new InMemoryTokenStore();
 	}
 	

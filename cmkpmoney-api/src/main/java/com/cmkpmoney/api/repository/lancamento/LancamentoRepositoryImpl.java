@@ -46,19 +46,16 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 		List<Predicate> predicates = new ArrayList<>();
 		
 		if (!StringUtils.isEmpty(lancamentoFilter.getDescricao())) 
-			predicates.add(builder.like(
+			predicates.add(builder.like(//Equivalente ao like em Sql, select * from tabela where descrição like "%descrisão%"
 					builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
 
-		
 		if (lancamentoFilter.getDataVencimentoDe() != null)
-			predicates.add(
+			predicates.add(//tudo o que for maior ou igual a dataVencimento
 					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
 		
-		
 		if (lancamentoFilter.getDataVencimentoAte() != null) 
-			predicates.add(
+			predicates.add(//tudo o que for menor ou igual a dataVencimento
 					builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
-		
 		
 		return predicates.toArray(new Predicate[predicates.size()]);
 	}

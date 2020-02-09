@@ -80,6 +80,7 @@ public class MoneyExceptionHandler extends ResponseEntityExceptionHandler {
 
 	}
 
+	//erro disparado para pessoa inexistente
 	@ExceptionHandler({PessoaInexistenteOuInativaException.class})
 	private ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex, WebRequest request){
 		String messageUsuario = messageSource.getMessage("pessoa.inexistente-ou-inativa", null,
@@ -89,7 +90,7 @@ public class MoneyExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 	}
 	
-
+	// classe que monta uma lista de erros
 	private List<Error> criarListaDeError(BindingResult bindingResult) {
 		List<Error> erros = new ArrayList<Error>();
 

@@ -34,10 +34,10 @@ public class LancamentoResourse {
 	@Autowired
 	private LancamentoService lancamentoService;
 	
-	@Autowired
+	@Autowired //injetando "publicador" de eventos
 	private ApplicationEventPublisher publisher;
 
-	@GetMapping
+	@GetMapping //recebe lancamentoFilter e pageable caso forem passados
 	public ResponseEntity<Page<Lancamento>> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable){
 		return ResponseEntity.ok(lancamentoRepository.filtrar(lancamentoFilter, pageable));
 	}

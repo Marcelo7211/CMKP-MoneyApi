@@ -17,6 +17,7 @@ public class RecursoCriadoListener implements ApplicationListener<RecursoCriadoE
 
 	@Override
 	public void onApplicationEvent(RecursoCriadoEvent event) {
+		//HttpServletResponse classe que acessa o header
 		HttpServletResponse response = event.getResponse();
 		Long codigo = event.getCodigo();
 

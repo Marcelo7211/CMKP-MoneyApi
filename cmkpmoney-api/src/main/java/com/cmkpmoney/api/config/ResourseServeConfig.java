@@ -22,6 +22,8 @@ public class ResourseServeConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//criando usuario e senha e salvendo em memória, o mesmo tambem pode vir do banco
+		//acompanho os proximos projetos.
 		auth.inMemoryAuthentication()
 			.withUser("admin")
 			.password("{noop}admin")
@@ -30,11 +32,12 @@ public class ResourseServeConfig extends ResourceServerConfigurerAdapter {
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
+		//definido permições para usuarios não autenticados
 		http.authorizeRequests()
-				.antMatchers("/categorias").permitAll()
-				.anyRequest().authenticated()
+				.antMatchers("/categorias").permitAll()//apenas esta uri será liberada
+				.anyRequest().authenticated()//todas as outras requisições serão interceptadas
 				.and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)//definindo seção como stateless
 				.and().csrf().disable();
 	}
 	
@@ -48,6 +51,6 @@ public class ResourseServeConfig extends ResourceServerConfigurerAdapter {
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-		resources.stateless(true);
+		resources.stateless(true);//reforçando seção como stateless, não guarda nada em seção
 	}
 }

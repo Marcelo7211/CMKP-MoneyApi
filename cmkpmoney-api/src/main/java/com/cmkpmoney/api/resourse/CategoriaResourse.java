@@ -29,7 +29,7 @@ public class CategoriaResourse {
 	@Autowired
 	private CategoriaRepository categoriaRepository;	
 	
-	@Autowired
+	@Autowired //injetando "publicador" de eventos
 	private ApplicationEventPublisher publisher;
 	
 	@GetMapping
